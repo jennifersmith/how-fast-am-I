@@ -3,7 +3,7 @@ var howFastAmI = {
 	data: {
 		userValue: 10,
 		thingRatios: [],
-		url: "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cspeed%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cspeed%22%20%7C%20sort(field%3D%22speed%22)&format=json&callback=?"
+		url: "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?"
 	},
 
 	userMessages: {
@@ -57,7 +57,7 @@ $(document).ready(function() {
 			function(data){
 			  var rows = data.query.results.row;
 			  for (var i = 0; i < rows.length; i++){
-				var currentValue = parseFloat(rows[i].speed);
+				var currentValue = parseFloat(rows[i].value);
 
 				howFastAmI.data.thingRatios.push({
 					name: rows[i].thing,
