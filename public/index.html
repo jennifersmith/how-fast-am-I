@@ -1,16 +1,22 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
- "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-   <title>How fast am I?</title>
-   <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+<meta charset="utf-8" />
+ <title>How fast am I?</title>
+<link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+   <link rel="stylesheet" href="style.css" type="text/css">
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
-</head>
-</head>
+	<style>
+  article, aside, details, figcaption, figure, footer, header,
+  hgroup, menu, nav, section { display: block; }
+</style>
+   </head>
 <body>
 <div id="doc" class="yui-t7">
-   <div id="hd" role="banner"><h1>How fast am I ?</h1></div>
-   <div id="bd" role="main">
+	<header id="hd" role="banner">
+		<h1>How fast am I ?</h1>
+	</header>
+   <article id="bd" role="main">
 	<div class="yui-g">
 		
 		<form id="how_fast_am_i_form">
@@ -20,16 +26,11 @@
 		</form>
 		<ul id="result">
 		</ul>
-		<textarea  id="debug">
-			
-		</textarea>
 	</div>
 
-	</div>
+	</article>
    <div id="ft" role="contentinfo"><p>Footer</p></div>
-   <script src="howfastami.js" type="text/javascript">
-   	
-   </script>
+   <script src="howfastami.js" type="text/javascript"></script>
 </div>
 </body>
 </html>
