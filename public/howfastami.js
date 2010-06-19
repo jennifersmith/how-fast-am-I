@@ -2,8 +2,12 @@ var howFastAmI = {
 
 	data: {
 		userValue: 10,
+		comparisonType: "speed",
 		thingRatios: [],
-		url: "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?"
+		urls:
+		{
+			speed : "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?"
+		} 
 	},
 
 	userMessages: {
@@ -52,8 +56,9 @@ $(document).ready(function() {
 	$("#how_fast_am_i_form").submit(function(){
 		//var mySpeed = $("input[name=my_speed]").val();
 		howFastAmI.data.userValue = $("input[name=my_speed]").val();
-
-		$.getJSON(howFastAmI.data.url,
+		howFastAmI.data.comparisonType = "speed";
+		howFastAmI.data.thingRatios = []; 
+		$.getJSON(howFastAmI.data.urls[howFastAmI.data.comparisonType],
 			function(data){
 			  var rows = data.query.results.row;
 			  for (var i = 0; i < rows.length; i++){
@@ -65,7 +70,7 @@ $(document).ready(function() {
 				});
 			  }
 			  
-			  howFastAmI.initVisualisation("speed");
+			  howFastAmI.initVisualisation(howFastAmI.data.comparisonType);
 			}
 		);
 		return false;
