@@ -46,7 +46,8 @@ var howFastAmI = {
 	},
 	
 	getResultString: function(val, comparisonType, direction, name) {
-		return "<li>" + val + howFastAmI.userMessages[comparisonType][direction] + name + "</li>";
+		var rounded = Math.round(val*100)/100;
+		return "<li>" + rounded + howFastAmI.userMessages[comparisonType][direction] + name + "</li>";
 	}
 };
 
