@@ -15,13 +15,11 @@ $(document).ready(function() {
 	
 	$("#how_fast_am_i_form").submit(function(){
 		var mySpeed = $("input[name=my_speed]").val();
-		console.info(mySpeed);
 		$.getJSON(tempUrl,
         function(data){
           var rows = data.query.results.row;
           var resultString = "";
           for (var i = 0; i < rows.length; i++){
-          	console.info(rows[i]);
             var currentSpeed = parseFloat(rows[i].speed);
           	resultString += "<li>You are " + getComparison(mySpeed, currentSpeed) + rows[i].thing + "</li>";
           	
