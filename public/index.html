@@ -19,13 +19,25 @@
    <article id="bd" role="main">
 	<div class="yui-g">
 		
-		<form id="how_fast_am_i_form">
-			<label for="my_speed">How fast am I ?</label>
-			<input type="text" name="my_speed"/> m/s
+		<form id="how-fast-am-i-form">
+			
+			<fieldset>
+				<legend>What type of measurement do you want to compare?</legend>
+				<label><input type="radio" value="speed" name="comparisonType" unit="metres per second"> Speed</label>
+				<label><input type="radio" value="storage" name="comparisonType" unit="gigs per thing"> Storage</label>
+			</fieldset>
+
+			<fieldset>
+				<legend>Enter the comparison value</legend>
+				<label><input type="text" name="comparisonValue"/> <span></span></label>
+			</fieldset>
+
 			<input type="submit" name="GO" value="GO"/>
 		</form>
+		
 		<ul id="result">
 		</ul>
+		
 	</div>
 
 	</article>
