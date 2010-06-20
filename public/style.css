@@ -73,8 +73,21 @@ legend {
     padding: 2px 3px;
 }
 
+#loading {
+    margin-top: 1em;
+    background-color: rgba(255,255,255,0.3);
+    padding: 1em;
+      display: none;
+}
+
+#loading p {
+    color: #fff;
+    font-size: 184%;
+}
+
 #single-result {
     margin-top: 1em;
+    display: none;
 }
 
 #single-result p {
@@ -82,6 +95,7 @@ legend {
     background-color: blue;
     font-size: 264%;
     text-align: center;
+
 }
 
 .result {
