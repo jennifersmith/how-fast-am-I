@@ -91,7 +91,13 @@ var howFastAmI = {
 		return "<li>" + rounded + howFastAmI.userMessages[comparisonType][direction] + name + "</li>";
 	},
 
-	processUrl : function(currentUrl){
+	processUrl : function(urls, index){
+			currentUrl = urls[index];
+			if(currentUrl==null){
+					alert("NOTHING LEFT GOING TO SHOW");
+				  howFastAmI.initVisualisation();
+				  return;
+			}
 			var nameFinder = howFastAmI.data.nameFinders[currentUrl.name];
 			var valueFinder = howFastAmI.data.valueFinders[currentUrl.name];
 			var rowFinder = howFastAmI.data.resultFinders[currentUrl.name];
@@ -108,7 +114,8 @@ var howFastAmI = {
 						ratio: currentValue/howFastAmI.data.userValue
 					});
 				  }
-				  howFastAmI.initVisualisation();
+				  alert(index + " was just done");
+				  howFastAmI.processUrl(urls,index+1);
 				}
 			);
 	}
@@ -126,11 +133,8 @@ $(document).ready(function() {
         howFastAmI.dom.greater.add(howFastAmI.dom.lesser).add(howFastAmI.dom.same).empty();
 
 		var urls = howFastAmI.data.urls[howFastAmI.data.comparisonType];
-		for(var k = 0; k < urls.length; k++)
-		{
-			var currentUrl = urls[k];
-			howFastAmI.processUrl(currentUrl);
-		}
+		
+		howFastAmI.processUrl(urls, 0);
 		return false;
 	})
 	.find("input[name=comparisonType]").click(function() {
