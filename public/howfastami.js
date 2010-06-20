@@ -6,32 +6,55 @@ var howFastAmI = {
 		thingRatios: [],
 		urls:
 		{
-			speed : "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?",
+			speed : 
+						[
+						{
+							name: "animals",
+							url: "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?"
+						},
+						{
+							name: "escapes",
+							url: "home/getthings?dataset=escapes"
+						}
+						]
+					,
+			
 			storage: "",
-			distance: "home/getthings?dataset=lines"
+			distance: {
+							trainlines: {
+							    name: "trainlines",
+							    url: "home/getthings?dataset=lines"
+							}
+					   }
 		} ,
 		resultFinders : 
 		{
-			speed:  function(data) {return data.query.results.row;},
-			distance:  function(data) {return data.results.bindings;}
+			animals:  function(data) {return data.query.results.row;},
+			trainlines:  function(data) {return data.results.bindings;},
+			escapes:  function(data) {return data.results.bindings;}
 		} ,
 		nameFinders : 
 		{
-			speed:  function(row) {return row.thing;},
-			distance:  function(row) {return row.name.value  + " (railway line)";}
+			animals:  function(row) { return "a " +row.thing;},
+			trainlines:  function(row) {return row.name.value  + " (railway line)";},
+			escapes:  function(row) {  return "the escape velocity of " + row.name.value;}
 		} ,
 		valueFinders : 
 		{
-			speed:  function(row) {return row.value;},
-			distance:  function(row) {return row.value.value;}
+			animals:  function(row) {return row.value;},
+			trainlines:  function(row) {return row.value.value;},
+			escapes:  function(row) {
+				console.info ( parseFloat(row.value.value) * 1000 /60/60);
+				return parseFloat(row.value.value) * 1000 /60/60;
+				}
 		}
 	},
 
 	userMessages: {
 		speed: {
-			greater: " times faster than a ",
-			lesser: " times slower than a ",
-			same: " EXACTLY as fast as a "
+			greater: " times faster than ",
+			lesser: " times slower than ",
+			same: " EXACTLY as fast as "
 		},
 		storage: {
 			greater: "bigger",
@@ -91,6 +114,29 @@ var howFastAmI = {
 	getResultString: function(val, comparisonType, direction, name) {
 		var rounded = Math.round(val*100)/100;
 		return "<li>" + rounded + howFastAmI.userMessages[comparisonType][direction] + name + "</li>";
+	},
+	
+	processUrl : function(currentUrl){
+		
+			var nameFinder = howFastAmI.data.nameFinders[currentUrl.name];
+			var valueFinder = howFastAmI.data.valueFinders[currentUrl.name];
+			var rowFinder = howFastAmI.data.resultFinders[currentUrl.name];
+			$.getJSON(currentUrl.url,
+				function(data){
+				  var rows = rowFinder(data);
+				  for (var i = 0; i < rows.length; i++){
+					var currentValue = parseFloat(valueFinder(rows[i]));
+					if(!currentValue){
+						continue;
+					}
+					howFastAmI.data.thingRatios.push({
+						name: nameFinder(rows[i]),
+						ratio: currentValue/howFastAmI.data.userValue
+					});
+				  }
+				  howFastAmI.initVisualisation();
+				}
+			);
 	}
 };
 
@@ -101,25 +147,12 @@ $(document).ready(function() {
 		howFastAmI.data.userValue = $("input[name=comparisonValue]").val();
 		howFastAmI.data.comparisonType = $("input[name=comparisonType]:checked").val();
 		howFastAmI.data.thingRatios = []; // need to make non static!
-		
-		$.getJSON(howFastAmI.data.urls[howFastAmI.data.comparisonType],
-			function(data){
-			  var rows = howFastAmI.data.resultFinders[howFastAmI.data.comparisonType](data);
-			  var nameFinder = howFastAmI.data.nameFinders[howFastAmI.data.comparisonType];
-			  var valueFinder = howFastAmI.data.valueFinders[howFastAmI.data.comparisonType];
-			  for (var i = 0; i < rows.length; i++){
-			  	console.info(rows[i])
-			  	var currentValue = parseFloat(valueFinder(rows[i]));
-
-				howFastAmI.data.thingRatios.push({
-					name: nameFinder(rows[i]),
-					ratio: currentValue/howFastAmI.data.userValue
-				});
-			  }
-			  
-			  howFastAmI.initVisualisation();
-			}
-		);
+		var urls = howFastAmI.data.urls["speed"];
+		for(var k = 0; k < urls.length; k++)
+		{
+			var currentUrl = urls[k];
+			howFastAmI.processUrl(currentUrl);
+		}
 		return false;
 	})
 	.find("input[name=comparisonType]").click(function() {
