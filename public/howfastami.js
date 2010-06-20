@@ -94,7 +94,6 @@ var howFastAmI = {
 	processUrl : function(urls, index){
 			currentUrl = urls[index];
 			if(currentUrl==null){
-					alert("NOTHING LEFT GOING TO SHOW");
 				  howFastAmI.initVisualisation();
 				  return;
 			}
@@ -114,7 +113,6 @@ var howFastAmI = {
 						ratio: currentValue/howFastAmI.data.userValue
 					});
 				  }
-				  alert(index + " was just done");
 				  howFastAmI.processUrl(urls,index+1);
 				}
 			);
