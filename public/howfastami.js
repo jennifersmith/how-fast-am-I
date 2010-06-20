@@ -1,6 +1,12 @@
 var howFastAmI = {
 
-	data: {
+	dom: {
+        greater: $("#greater ul"),
+        lesser: $("#lesser ul"),
+        same: $("#same ul")
+    },
+
+    data: {
 		userValue: 10,
 		comparisonType: "speed",
 		thingRatios: [],
@@ -70,52 +76,24 @@ var howFastAmI = {
 	},
 	
 	initVisualisation: function(clear) {
-		/*
-        var html = {
-            lesser: "<ul>",
-            greater: "<ul>",
-            same: "<ul>"
-        };
-        */
-
-
-        var $greater = $("#greater ul");
-        var $lesser = $("#lesser ul");
-        var $same = $("#same ul");
-
-        //var resultString = "<ul>";
 		var ratios = howFastAmI.data.thingRatios;
 		var comparisonType = howFastAmI.data.comparisonType;
 		for (var i = 0; i < ratios.length; i++) {
 			if (ratios[i].ratio < 1) {
-			  //html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
-              $greater.append(howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name));
+              howFastAmI.dom.greater.append(howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name));
 			} else if (ratios[i].ratio > 1) {
-				//html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
-                $lesser.append(howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name));
+                howFastAmI.dom.lesser.append(howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name));
 			} else {
-				//html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
-                $same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
+                howFastAmI.dom.same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
 			}
-		}
-
-        /*
-		html.greater += "</ul>";
-        html.lesser += "</ul>";
-        html.same += "</ul>";
-
-
-		$("#greater").html(html.greater);
-        $("#lesser").html(html.lesser);
-        $("#same").html(html.same);
-        */		
+		}		
 	},
-	
+
 	getResultString: function(val, comparisonType, direction, name) {
 		var rounded = Math.round(val*100)/100;
 		return "<li>" + rounded + howFastAmI.userMessages[comparisonType][direction] + name + "</li>";
 	},
-	
+
 	processUrl : function(currentUrl){
 		
 			var nameFinder = howFastAmI.data.nameFinders[currentUrl.name];
@@ -146,8 +124,12 @@ $(document).ready(function() {
 	$("#how-fast-am-i-form").submit(function(){
 		howFastAmI.data.userValue = $("input[name=comparisonValue]").val();
 		howFastAmI.data.comparisonType = $("input[name=comparisonType]:checked").val();
-		howFastAmI.data.thingRatios = []; // need to make non static!
-		var urls = howFastAmI.data.urls["speed"];
+
+        // set up
+        howFastAmI.data.thingRatios = []; // need to make non static!
+        howFastAmI.dom.greater.add(howFastAmI.dom.lesser).add(howFastAmI.dom.same).empty();
+
+        var urls = howFastAmI.data.urls["speed"];
 		for(var k = 0; k < urls.length; k++)
 		{
 			var currentUrl = urls[k];
