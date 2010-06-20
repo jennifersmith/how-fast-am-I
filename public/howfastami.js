@@ -103,7 +103,6 @@ var howFastAmI = {
 			var rowFinder = howFastAmI.data.resultFinders[currentUrl.name];
 			$.getJSON(currentUrl.url,
 				function(data){
-		    	 alert(rowFinder + currentUrl.name);
 				  var rows = rowFinder(data);
 				  for (var i = 0; i < rows.length; i++){
 					var currentValue = parseFloat(valueFinder(rows[i]));
