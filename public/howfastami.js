@@ -34,6 +34,12 @@ var howFastAmI = {
 							{
 							    name: "telly",
 							    url: "http://how-fast-am-i.heroku.com/home/getthings?dataset=telly&callback=?"
+							},
+							],
+			height :[
+							{
+							    name: "mountains",
+							    url: "http://how-fast-am-i.heroku.com/home/getthings?dataset=mountains&callback=?"
 							}
 			]
 		} ,
@@ -42,14 +48,16 @@ var howFastAmI = {
 			animals:  function(data) {return data.query.results.row;},
 			trainlines:  function(data) {return data.results.bindings;},
 			escapes:  function(data) {return data.results.bindings;},
-			telly:  function(data) {return data.results.bindings;}
+			telly:  function(data) {return data.results.bindings;},
+			mountains:  function(data) {return data.results.bindings;}
 		} ,
 		nameFinders : 
 		{
 			animals:  function(row) { return "a " +row.thing;},
 			trainlines:  function(row) {return row.name.value  + " (railway line)";},
 			escapes:  function(row) {  return "the escape velocity of " + row.name.value;},
-			telly:  function(row) {  return "the entire runtime of " + row.name.value;}
+			telly:  function(row) {  return "the entire runtime of " + row.name.value;},
+			mountains:  function(row) {  return  row.name.value;}
 		} ,
 		valueFinders : 
 		{
@@ -59,7 +67,8 @@ var howFastAmI = {
 				return parseFloat(row.value.value) * 1000;
 				},
 			telly:  function(row) {  
-					return parseFloat(row.episodes.value) * parseFloat(row.runtime.value) /60/60;}
+					return parseFloat(row.episodes.value) * parseFloat(row.runtime.value) /60/60;},
+			mountains:  function(row) {  return row.value.value;}
 		}
 	},
 
@@ -75,14 +84,19 @@ var howFastAmI = {
 			same: " just write "
 		},
 		distance: {
-			greater: " times further than the ",
-			lesser: " times nearer than the ",
-			same: " exactly as long as a "
-		},
-		time: {
 			greater: " times longer than the ",
 			lesser: " times shorter than the ",
-			same: " exactly as long as a "
+			same: " exactly as long as "
+		},
+		time: {
+			greater: " times longer than ",
+			lesser: " times shorter than ",
+			same: " exactly as long as "
+		},
+		height: {
+			greater: " times taller than ",
+			lesser: " times shorter than ",
+			same: " exactly as high as "
 		}
 		
 	},
@@ -123,8 +137,13 @@ var howFastAmI = {
 					if(!currentValue){
 						continue;
 					}
+					var link = "";
+					if(rows[i].page){
+						link = rows[i].page.value;
+					}
 					howFastAmI.data.thingRatios.push({
 						name: nameFinder(rows[i]),
+						link: link,
 						ratio: currentValue/howFastAmI.data.userValue
 					});
 				  }
