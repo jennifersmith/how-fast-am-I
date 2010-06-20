@@ -18,14 +18,12 @@ var howFastAmI = {
 						}
 						]
 					,
-			
-			storage: "",
-			distance: {
-							trainlines: {
+			distance: [
+							{
 							    name: "trainlines",
 							    url: "home/getthings?dataset=lines"
 							}
-					   }
+					   ]
 		} ,
 		resultFinders : 
 		{
@@ -104,7 +102,6 @@ var howFastAmI = {
 	},
 	
 	processUrl : function(currentUrl){
-		
 			var nameFinder = howFastAmI.data.nameFinders[currentUrl.name];
 			var valueFinder = howFastAmI.data.valueFinders[currentUrl.name];
 			var rowFinder = howFastAmI.data.resultFinders[currentUrl.name];
@@ -134,7 +131,7 @@ $(document).ready(function() {
 		howFastAmI.data.userValue = $("input[name=comparisonValue]").val();
 		howFastAmI.data.comparisonType = $("input[name=comparisonType]:checked").val();
 		howFastAmI.data.thingRatios = []; // need to make non static!
-		var urls = howFastAmI.data.urls["speed"];
+		var urls = howFastAmI.data.urls[howFastAmI.data.comparisonType];
 		for(var k = 0; k < urls.length; k++)
 		{
 			var currentUrl = urls[k];
