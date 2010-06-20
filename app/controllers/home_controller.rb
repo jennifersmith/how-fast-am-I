@@ -23,7 +23,19 @@ class HomeController < ApplicationController
 
       ?stuff <http://dbpedia.org/property/escapeVelocity>    ?value 
 
-    }"}
+    }",
+    :telly => "SELECT distinct  ?stuff, ?episodes, ?runtime, ?name
+
+  WHERE
+
+    { 
+     ?stuff <http://dbpedia.org/property/name> ?name .
+
+      ?stuff <http://dbpedia.org/property/numEpisodes>    ?episodes .
+      ?stuff <http://dbpedia.org/ontology/runtime> ?runtime
+
+    }
+  "}
 	end
 	def getthings 
 		queryEscaped = CGI::escape(@queries[params[:dataset].intern]||@queries.first[1])
