@@ -10,6 +10,7 @@ class HomeController < ApplicationController
 
     { 
      ?stuff <http://dbpedia.org/property/name> ?name .
+    ?stuff <http://xmlns.com/foaf/0.1/page> ?page .
 
       ?stuff <http://dbpedia.org/property/linelength>    ?value 
 
@@ -20,16 +21,20 @@ class HomeController < ApplicationController
 
     { 
      ?stuff <http://dbpedia.org/property/name> ?name .
+     
+    ?stuff <http://xmlns.com/foaf/0.1/page> ?page .
 
       ?stuff <http://dbpedia.org/property/escapeVelocity>    ?value 
 
     }",
-    :telly => "SELECT distinct  ?stuff, ?episodes, ?runtime, ?name
+    :telly => "SELECT distinct  ?stuff, ?episodes, ?runtime, ?name, ?page
 
   WHERE
 
     { 
      ?stuff <http://dbpedia.org/property/name> ?name .
+     
+    ?stuff <http://xmlns.com/foaf/0.1/page> ?page .
 
       ?stuff <http://dbpedia.org/property/numEpisodes>    ?episodes .
       ?stuff <http://dbpedia.org/ontology/runtime> ?runtime
