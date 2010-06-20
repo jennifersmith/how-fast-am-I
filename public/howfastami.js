@@ -112,13 +112,13 @@ var howFastAmI = {
         for (var i = 0; i < ratios.length; i++) {
 			if (ratios[i].ratio < 1) {
               //howFastAmI.dom.greater.append(howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name));
-               html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
+               html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name, ratios[i].link);
 			} else if (ratios[i].ratio > 1) {
                 //howFastAmI.dom.lesser.append(howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name));
-                html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
+                html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name, ratios[i].link);
 			} else {
                 //howFastAmI.dom.same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
-                html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
+                html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name, ratios[i].link);
 			}
 		}
 
@@ -145,9 +145,13 @@ var howFastAmI = {
 
     },
 
-	getResultString: function(val, comparisonType, direction, name) {
+	getResultString: function(val, comparisonType, direction, name, link) {
 		var rounded = Math.round(val*100)/100;
-		return "<li>" + rounded + howFastAmI.userMessages[comparisonType][direction] + name + "</li>";
+		namedisp = name;
+		if(link){
+			namedisp = "<a href='" + link + "' target='stuff'>" + namedisp + "</a>";
+		}
+		return "<li>" + rounded + howFastAmI.userMessages[comparisonType][direction] + namedisp + "</li>";
 	},
 
 	processUrl : function(urls, index){
