@@ -4,24 +4,57 @@ header {
 }
 
 header h1 {
-	font-size: 174%;
+	font-size: 197%;
 	color: yellow;
+    text-shadow: 2px 2px 2px #000;
 }
 
 article {
-	border: 2px solid red;
 	margin-top: 1em;
-	padding: 1em;
+}
+
+form {
+    background-color: rgba(204,0,0,1);
+    overflow: hidden;
+    padding: 1em;
+    -webkit-box-shadow: 3px 3px 3px #666;
+
+}
+
+form div {
+    float: left;
+}
+
+form .submit {
+    text-align: center;
+    margin-top: 60px;
+}
+
+form .submit input {
+    font-size: 174%;
+    display: inline-block;
+    padding: 10px 20px 12px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1;
+    -webkit-border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    background-color: rgba(255,204,0, 0.7);
 }
 
 fieldset {
-	background-color: lightblue;
+	background-color: rgba(255,255,255,0.6);
 	padding: 1em;
 	margin-top: 1em;
+    -webkit-border-radius: 5px;
 }
 
 legend {
 	font-size: 146.5%;
-	color: yellow;
-	background: rgba(0,0,255,0.8);
+	color: #ffcc00;
+	background-color: rgba(102,0,204,0.8);
+    padding: 2px 3px;
 }
+
