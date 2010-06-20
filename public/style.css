@@ -102,6 +102,11 @@ legend {
     text-decoration: underline;
 }
 
+#single-result p a:hover {
+    background-color: yellow;
+    color: blue;
+}
+
 .result {
     color: yellow;
     display: none;
