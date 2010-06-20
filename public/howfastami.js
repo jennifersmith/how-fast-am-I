@@ -24,14 +24,12 @@ var howFastAmI = {
 						}
 						]
 					,
-			
-			storage: "",
-			distance: {
-							trainlines: {
+			distance: [
+							{
 							    name: "trainlines",
 							    url: "home/getthings?dataset=lines"
 							}
-					   }
+					   ]
 		} ,
 		resultFinders : 
 		{
@@ -50,8 +48,7 @@ var howFastAmI = {
 			animals:  function(row) {return row.value;},
 			trainlines:  function(row) {return row.value.value;},
 			escapes:  function(row) {
-				console.info ( parseFloat(row.value.value) * 1000 /60/60);
-				return parseFloat(row.value.value) * 1000 /60/60;
+				return parseFloat(row.value.value) * 1000;
 				}
 		}
 	},
@@ -95,7 +92,6 @@ var howFastAmI = {
 	},
 
 	processUrl : function(currentUrl){
-		
 			var nameFinder = howFastAmI.data.nameFinders[currentUrl.name];
 			var valueFinder = howFastAmI.data.valueFinders[currentUrl.name];
 			var rowFinder = howFastAmI.data.resultFinders[currentUrl.name];
@@ -129,7 +125,7 @@ $(document).ready(function() {
         howFastAmI.data.thingRatios = []; // need to make non static!
         howFastAmI.dom.greater.add(howFastAmI.dom.lesser).add(howFastAmI.dom.same).empty();
 
-        var urls = howFastAmI.data.urls["speed"];
+		var urls = howFastAmI.data.urls[howFastAmI.data.comparisonType];
 		for(var k = 0; k < urls.length; k++)
 		{
 			var currentUrl = urls[k];
