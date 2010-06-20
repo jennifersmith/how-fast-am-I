@@ -62,7 +62,8 @@ var howFastAmI = {
 		valueFinders : 
 		{
 			animals:  function(row) {return row.value;},
-			trainlines:  function(row) {return row.value.value;},
+			trainlines:  function(row) {
+				return parseFloat(row.value.value) * 1000;},
 			escapes:  function(row) {
 				return parseFloat(row.value.value) * 1000;
 				},
