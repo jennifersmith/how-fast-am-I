@@ -1,5 +1,10 @@
+
+html {
+    background-color: #000;
+}
+
 body {
-    margin: 10px;
+    padding: 10px;
 }
 header {
     background: rgba(255,0,0,0.8);
@@ -7,9 +12,11 @@ header {
 }
 
 header h1 {
-	font-size: 197%;
+	font-size: 300%;
 	color: yellow;
-    text-shadow: 2px 2px 2px #000;
+    text-shadow: 1px 1px 1px #6600cc;
+    font-variant: small-caps;
+    font-style: italic;
 }
 
 article {
@@ -64,5 +71,21 @@ legend {
 	color: #ffcc00;
 	background-color: rgba(102,0,204,0.8);
     padding: 2px 3px;
+}
+
+#single-result {
+    margin-top: 1em;
+}
+
+#single-result p {
+    color: yellow;
+    background-color: blue;
+    font-size: 264%;
+    text-align: center;
+}
+
+.result {
+    color: yellow;
+    display: none;
 }
 

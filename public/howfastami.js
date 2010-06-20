@@ -104,16 +104,46 @@ var howFastAmI = {
 	initVisualisation: function(clear) {
 		var ratios = howFastAmI.data.thingRatios;
 		var comparisonType = howFastAmI.data.comparisonType;
-		for (var i = 0; i < ratios.length; i++) {
+		var html = {
+            greater: "",
+            lesser: "",
+            same: ""
+        };
+        for (var i = 0; i < ratios.length; i++) {
 			if (ratios[i].ratio < 1) {
-              howFastAmI.dom.greater.append(howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name));
+              //howFastAmI.dom.greater.append(howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name));
+               html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
 			} else if (ratios[i].ratio > 1) {
-                howFastAmI.dom.lesser.append(howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name));
+                //howFastAmI.dom.lesser.append(howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name));
+                html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
 			} else {
-                howFastAmI.dom.same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
+                //howFastAmI.dom.same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
+                html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
 			}
-		}		
+		}
+
+        howFastAmI.dom.greater.html(html.greater);
+        howFastAmI.dom.lesser.html(html.lesser);
+        howFastAmI.dom.same.html(html.same);
+
+        howFastAmI.renderRandomResult();
+
 	},
+
+    renderRandomResult: function() {
+        var comparators = ["greater", "lesser"];
+        var comparator = comparators[rand(2)-1];
+        var $results = howFastAmI.dom[comparator];
+        var numberOfResults = $results.find("li").length;
+        if (numberOfResults === 0) {
+            return;
+        }
+
+        var resultToDisplay = $results.find("li").eq(rand(numberOfResults) - 1).html();
+        $("#single-result").html("<p>" + resultToDisplay + "</p>");
+
+
+    },
 
 	getResultString: function(val, comparisonType, direction, name) {
 		var rounded = Math.round(val*100)/100;
