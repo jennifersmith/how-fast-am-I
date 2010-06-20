@@ -83,8 +83,15 @@ var howFastAmI = {
 			} else {
                 howFastAmI.dom.same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
 			}
-		}		
+		}
+
+        renderRandomResult();
+
 	},
+
+    renderRandomResult: function() {
+
+    },
 
 	getResultString: function(val, comparisonType, direction, name) {
 		var rounded = Math.round(val*100)/100;
