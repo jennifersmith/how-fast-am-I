@@ -18,7 +18,11 @@ class HomeController < ApplicationController
 	def getthings 
 		queryEscaped = CGI::escape(@queries[params[:dataset].intern]||@queries.first[1])
 		res = RestClient.get 'http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&should-sponge=&query=' + queryEscaped + '&format=application%2Fjson&debug=on&timeout='
-		res = JSON.parse(res.body)
-		render :json=>res
+		if(res.respond_to? :body)
+			result = JSON.parse(res.body)
+		else 
+			raise res.inspect + ' is all there is'
+		end
+		render :json=>result
 	end
 end
