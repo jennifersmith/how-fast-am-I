@@ -44,8 +44,7 @@ var howFastAmI = {
 			animals:  function(row) {return row.value;},
 			trainlines:  function(row) {return row.value.value;},
 			escapes:  function(row) {
-				console.info ( parseFloat(row.value.value) * 1000 /60/60);
-				return parseFloat(row.value.value) * 1000 /60/60;
+				return parseFloat(row.value.value) * 1000;
 				}
 		}
 	},
