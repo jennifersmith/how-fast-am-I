@@ -70,24 +70,32 @@ var howFastAmI = {
 	},
 	
 	initVisualisation: function() {
-		var resultString = "<ul>";
+		var html = {
+            lesser: "<ul>",
+            greater: "<ul>",
+            same: "<ul>"
+        };
+
+        //var resultString = "<ul>";
 		var ratios = howFastAmI.data.thingRatios;
 		var comparisonType = howFastAmI.data.comparisonType;
 		for (var i = 0; i < ratios.length; i++) {
 			if (ratios[i].ratio < 1) {
-			  // greater
-			 // resultString += "<li>" + 1/ratios[i].ratio + howFastAmI.userMessages[comparisonType].greater + ratios[i].name + "</li>";
-			  resultString += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
+			  html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
 			} else if (ratios[i].ratio > 1) {
-				// lesser
-				resultString += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
+				html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
 			} else {
-				resultString += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
+				html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
 			}
-		
 		}
-		resultString += "</ul>";
-		$("#result").html(resultString);
+		html.greater += "</ul>";
+        html.lesser += "</ul>";
+        html.same += "</ul>";
+
+
+		$("#greater").html(html.greater);
+        $("#lesser").html(html.lesser);
+        $("#same").html(html.same);
 		
 	},
 	

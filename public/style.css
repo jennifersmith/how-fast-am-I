@@ -1,5 +1,8 @@
+body {
+    margin: 10px;
+}
 header {
-	background: rgba(255,0,0,0.8);
+    background: rgba(255,0,0,0.8);
 	padding: 1em;
 }
 
@@ -17,8 +20,6 @@ form {
     background-color: rgba(204,0,0,1);
     overflow: hidden;
     padding: 1em;
-    -webkit-box-shadow: 3px 3px 3px #666;
-
 }
 
 form div {
@@ -33,7 +34,7 @@ form .submit {
 form .submit input {
     font-size: 174%;
     display: inline-block;
-    padding: 10px 20px 12px;
+    padding: 10px 60px 12px;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -42,6 +43,13 @@ form .submit input {
     position: relative;
     cursor: pointer;
     background-color: rgba(255,204,0, 0.7);
+    -webkit-transform: rotate(-9deg);
+
+}
+
+form .submit input:hover {
+    -webkit-transform: rotate(9deg) scale(1.5);
+    -webkit-transition: -webkit-transform 0.1s ease-in;
 }
 
 fieldset {
