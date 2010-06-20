@@ -3,18 +3,15 @@ require 'json'
 
 class HomeController < ApplicationController
 	def initialize
-		@queries = {:motorways => 
+		@queries = {:lines => 
 "SELECT *
 
   WHERE
 
     { 
+     ?stuff <http://dbpedia.org/property/name> ?name .
 
-      ?motorway  a   <http://dbpedia.org/ontology/Road>     .
-
-      ?motorway <http://xmlns.com/foaf/0.1/name>    ?name  .
-
-      ?motorway <http://dbpedia.org/ontology/length>    ?value
+      ?stuff <http://dbpedia.org/property/linelength>    ?value 
 
     }"}
 	end

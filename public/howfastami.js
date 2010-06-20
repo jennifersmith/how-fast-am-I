@@ -8,7 +8,7 @@ var howFastAmI = {
 		{
 			speed : "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?",
 			storage: "",
-			distance: "home/getthings?dataset=motorways"
+			distance: "home/getthings?dataset=lines"
 		} ,
 		resultFinders : 
 		{
@@ -18,7 +18,7 @@ var howFastAmI = {
 		nameFinders : 
 		{
 			speed:  function(row) {return row.thing;},
-			distance:  function(row) {return row.name.value;}
+			distance:  function(row) {return row.name.value  + " (railway line)";}
 		} ,
 		valueFinders : 
 		{
