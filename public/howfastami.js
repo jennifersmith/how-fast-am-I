@@ -8,8 +8,23 @@ var howFastAmI = {
 		{
 			speed : "http://query.yahooapis.com/v1/public/yql?q=select%20thing%2Cvalue%20from%20csv%20where%20url%20%3D%20%22https%3A%2F%2Fspreadsheets.google.com%2Fpub%3Fkey%3D0Athg3tLfif75dFhmNlBxS0RGTlFSaUxIUFZ3ckZaNGc%26hl%3Den_GB%26single%3Dtrue%26gid%3D0%26output%3Dcsv%22%20and%20columns%3D%22thing%2Cvalue%22%20%7C%20sort(field%3D%22value%22)&format=json&diagnostics=true&callback=?",
 			storage: "",
-			distance: ""
-		} 
+			distance: "home/getthings?dataset=motorways"
+		} ,
+		resultFinders : 
+		{
+			speed:  function(data) {return data.query.results.row;},
+			distance:  function(data) {return data.results.bindings;}
+		} ,
+		nameFinders : 
+		{
+			speed:  function(row) {return row.thing;},
+			distance:  function(row) {return row.name.value;}
+		} ,
+		valueFinders : 
+		{
+			speed:  function(row) {return row.value;},
+			distance:  function(row) {return row.value.value;}
+		}
 	},
 
 	userMessages: {
@@ -24,9 +39,9 @@ var howFastAmI = {
 			same: " just write "
 		},
 		distance: {
-			greater: "",
-			lesser: "",
-			same: ""
+			greater: " times longer than the ",
+			lesser: " times shorter than the ",
+			same: " exactly as long as a "
 		}
 		
 	},
@@ -65,16 +80,19 @@ $(document).ready(function() {
 	$("#how-fast-am-i-form").submit(function(){
 		howFastAmI.data.userValue = $("input[name=comparisonValue]").val();
 		howFastAmI.data.comparisonType = $("input[name=comparisonType]:checked").val();
-		howFastAmI.data.thingRatios = []; 
+		howFastAmI.data.thingRatios = []; // need to make non static!
 		
 		$.getJSON(howFastAmI.data.urls[howFastAmI.data.comparisonType],
 			function(data){
-			  var rows = data.query.results.row;
+			  var rows = howFastAmI.data.resultFinders[howFastAmI.data.comparisonType](data);
+			  var nameFinder = howFastAmI.data.nameFinders[howFastAmI.data.comparisonType];
+			  var valueFinder = howFastAmI.data.valueFinders[howFastAmI.data.comparisonType];
 			  for (var i = 0; i < rows.length; i++){
-				var currentValue = parseFloat(rows[i].value);
+			  	console.info(rows[i])
+			  	var currentValue = parseFloat(valueFinder(rows[i]));
 
 				howFastAmI.data.thingRatios.push({
-					name: rows[i].thing,
+					name: nameFinder(rows[i]),
 					ratio: currentValue/howFastAmI.data.userValue
 				});
 			  }
