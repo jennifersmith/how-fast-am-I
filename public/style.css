@@ -1,6 +1,10 @@
+
+html {
+    background-color: #000;
+}
+
 body {
     padding: 10px;
-    background-color: #000;
 }
 header {
     background: rgba(255,0,0,0.8);
@@ -69,7 +73,19 @@ legend {
     padding: 2px 3px;
 }
 
+#single-result {
+    margin-top: 1em;
+}
+
+#single-result p {
+    color: yellow;
+    background-color: blue;
+    font-size: 264%;
+    text-align: center;
+}
+
 .result {
     color: yellow;
+    display: none;
 }
 
