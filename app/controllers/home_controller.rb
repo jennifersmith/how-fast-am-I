@@ -21,7 +21,7 @@ class HomeController < ApplicationController
 		if(res.respond_to? :body)
 			result = JSON.parse(res.body)
 		else 
-			raise res.inspect + ' is all there is'
+			result = res
 		end
 		render :json=>result
 	end
