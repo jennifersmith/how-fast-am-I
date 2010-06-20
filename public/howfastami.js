@@ -20,14 +20,14 @@ var howFastAmI = {
 						},
 						{
 							name: "escapes",
-							url: "http://how-fast-am-i.heroku.com/home/getthings?dataset=escapes"
+							url: "http://how-fast-am-i.heroku.com/home/getthings?dataset=escapes&callback=?"
 						}
 						]
 					,
 			distance: [
 							{
 							    name: "trainlines",
-							    url: "http://how-fast-am-i.heroku.com/home/getthings?dataset=lines"
+							    url: "http://how-fast-am-i.heroku.com/home/getthings?dataset=lines&callback=?"
 							}
 					   ]
 		} ,

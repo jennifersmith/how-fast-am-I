@@ -33,7 +33,7 @@ class HomeController < ApplicationController
 		else 
 			result = res
 		end
-		render_json result.to_json
+		render_json result
 	end
 	 def render_json(json, options={})
       callback, variable = params[:callback], params[:variable]
