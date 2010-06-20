@@ -59,7 +59,7 @@ var howFastAmI = {
 				return parseFloat(row.value.value) * 1000;
 				},
 			telly:  function(row) {  
-					return parseFloat(row.episodes.value) * parseFloat(row.runtime.value) * 60;}
+					return parseFloat(row.episodes.value) * parseFloat(row.runtime.value) /60/60;}
 		}
 	},
 
