@@ -46,25 +46,37 @@ var howFastAmI = {
 		
 	},
 	
-	initVisualisation: function() {
-		var html = {
+	initVisualisation: function(clear) {
+		/*
+        var html = {
             lesser: "<ul>",
             greater: "<ul>",
             same: "<ul>"
         };
+        */
+
+
+        var $greater = $("#greater ul");
+        var $lesser = $("#lesser ul");
+        var $same = $("#same ul");
 
         //var resultString = "<ul>";
 		var ratios = howFastAmI.data.thingRatios;
 		var comparisonType = howFastAmI.data.comparisonType;
 		for (var i = 0; i < ratios.length; i++) {
 			if (ratios[i].ratio < 1) {
-			  html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
+			  //html.greater += howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name);
+              $greater.append(howFastAmI.getResultString(1/ratios[i].ratio, comparisonType, "greater", ratios[i].name));
 			} else if (ratios[i].ratio > 1) {
-				html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
+				//html.lesser += howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name);
+                $lesser.append(howFastAmI.getResultString(ratios[i].ratio, comparisonType, "lesser", ratios[i].name));
 			} else {
-				html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
+				//html.same += howFastAmI.getResultString("", comparisonType, "same", ratios[i].name);
+                $same.append(howFastAmI.getResultString("", comparisonType, "same", ratios[i].name));
 			}
 		}
+
+        /*
 		html.greater += "</ul>";
         html.lesser += "</ul>";
         html.same += "</ul>";
@@ -73,7 +85,7 @@ var howFastAmI = {
 		$("#greater").html(html.greater);
         $("#lesser").html(html.lesser);
         $("#same").html(html.same);
-		
+        */		
 	},
 	
 	getResultString: function(val, comparisonType, direction, name) {
