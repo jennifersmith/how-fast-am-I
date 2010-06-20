@@ -13,6 +13,16 @@ class HomeController < ApplicationController
 
       ?stuff <http://dbpedia.org/property/linelength>    ?value 
 
+    }",
+    :escapes =>"SELECT *
+
+  WHERE
+
+    { 
+     ?stuff <http://dbpedia.org/property/name> ?name .
+
+      ?stuff <http://dbpedia.org/property/escapeVelocity>    ?value 
+
     }"}
 	end
 	def getthings 
