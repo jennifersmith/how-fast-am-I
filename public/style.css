@@ -95,7 +95,11 @@ legend {
     background-color: blue;
     font-size: 264%;
     text-align: center;
+}
 
+#single-result p a {
+    color: yellow;
+    text-decoration: underline;
 }
 
 .result {
