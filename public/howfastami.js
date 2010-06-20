@@ -140,7 +140,9 @@ var howFastAmI = {
         }
 
         var resultToDisplay = $results.find("li").eq(rand(numberOfResults) - 1).html();
-        $("#single-result").html("<p>" + resultToDisplay + "</p>");
+        $("#loading").slideUp(function() {
+            $("#single-result").html("<p>" + resultToDisplay + "</p>").fadeIn();
+        });
 
 
     },
@@ -187,10 +189,12 @@ var howFastAmI = {
 $(document).ready(function() {
 	
 	$("#how-fast-am-i-form").submit(function(){
-		howFastAmI.data.userValue = $("input[name=comparisonValue]").val();
+		$("#loading").slideDown();
+        howFastAmI.data.userValue = $("input[name=comparisonValue]").val();
 		howFastAmI.data.comparisonType = $("input[name=comparisonType]:checked").val();
 
         // set up
+        $("#single-result").fadeOut();
         howFastAmI.data.thingRatios = []; // need to make non static!
         howFastAmI.dom.greater.add(howFastAmI.dom.lesser).add(howFastAmI.dom.same).empty();
 
