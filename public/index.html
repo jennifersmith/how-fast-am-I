@@ -12,34 +12,40 @@
 </style>
    </head>
 <body>
-<div id="doc" class="yui-t7">
+<div id="doc2" class="yui-t7">
 	<header id="hd" role="banner">
 		<h1>How fast am I ?</h1>
 	</header>
    <article id="bd" role="main">
-	<div class="yui-g">
-		
-		<form id="how-fast-am-i-form">
-			
-			<fieldset>
-				<legend>What type of measurement do you want to compare?</legend>
-				<label><input type="radio" value="speed" name="comparisonType" unit="metres per second"> Speed</label>
-				<label><input type="radio" value="storage" name="comparisonType" unit="gigs per thing"> Storage</label>
-				<label><input type="radio" value="distance" name="comparisonType" unit="metres"> Distance</label>
-			</fieldset>
+	<div class="yui-gc">
 
-			<fieldset>
-				<legend>Enter the comparison value</legend>
-				<label><input type="text" name="comparisonValue"/> <span></span></label>
-			</fieldset>
+        <form id="how-fast-am-i-form">
 
-			<input type="submit" name="GO" value="GO"/>
+            <div class="yui-u first inputs">
+                <fieldset>
+                    <legend>What type of measurement do you want to compare?</legend>
+                    <label><input type="radio" value="speed" name="comparisonType" unit="metres per second" checked="checked"> Speed</label>
+                    <label><input type="radio" value="storage" name="comparisonType" unit="gigs per thing"> Storage</label>
+                    <label><input type="radio" value="distance" name="comparisonType" unit="metres"> Distance</label>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Enter the comparison value</legend>
+                    <label><input type="text" name="comparisonValue"/> <span>metres per second</span></label>
+                </fieldset>
+            </div>
+
+            <div class="yui-u submit">
+                <input type="submit" name="GO" value="GO"/>
+            </div>
 		</form>
-		
-		<ul id="result">
-		</ul>
-		
+
 	</div>
+
+   <div class="yui-g">
+       <ul id="result">
+       </ul>
+    </div>
 
 	</article>
    <div id="ft" role="contentinfo"><p>Footer</p></div>
