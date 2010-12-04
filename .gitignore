@@ -1,2 +1,5 @@
+.rvmrc
+.sass-cache
 tmp
 log
+*.sqlite3
