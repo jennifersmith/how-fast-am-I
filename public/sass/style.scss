@@ -1,14 +1,90 @@
-$blue: #3bbfce;
-$margin: 16px;
+$blue: blue;
+$red : rgba(255, 0, 0, 0.796875);
+$yellow: rgba(255,204,0, 1);
+$black: #000;
+$purple: rgba(102,0,204,0.8);
+$purple-solid: rgba(102,0,204,1);
+$pink: rgba(255,255,255,0.6);
 
-.content-navigation {
-  border-color: $blue;
-  color:
-    darken($blue, 9%);
+
+body{
+	background: $black;
 }
 
-.border {
-  padding: $margin / 2;
-  margin: $margin / 2;
-  border-color: $blue;
+#hd{
+	background: $red;
+	padding: 1em;
+	margin:0 0  20px  ;
+}
+
+#ft{
+	background: $red;
+	padding:4px;
+	font-size:0.8em;
+	text-align:right;
+}
+
+h1 {
+	font:{
+		size:300%;
+		variant: small-caps;
+		style: italic;
+	};
+	color: $yellow;
+    text-shadow: 2px 2px 2px $blue;
+}
+
+form{
+	background-color: $blue;
+	width:100%;
+	float:left;
+	fieldset {
+		width:500px;
+		margin: 10px;
+		background-color: rgba(255,255,255,0.6);
+		padding: 1em;
+		margin-top: 1em;
+		float:left;
+	    -webkit-border-radius: 5px;
+		input {
+			font-size:2em;
+			width:400px;
+			margin: 10px auto;
+			display:block
+		}
+	}	
+	legend{
+		font-size:1.4em;
+		margin: 0;
+		display:block;
+		color:$yellow;
+		background-color:$purple-solid;
+		padding:10px;
+	};
+	div.buttons {
+		float:left;
+		padding: 80px 0 30px;
+	}
+	
+}
+
+.go-button {
+	font-size: 174%;
+	display: inline-block;
+	padding: 10px 60px 12px;
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	line-height: 1;
+	-webkit-border-radius: 5px;
+	position: relative;
+	cursor: pointer;
+	background-color: $yellow;
+	-webkit-transform: rotate(8deg);
+	margin: 0 20px;
+}
+.go-button:hover{
+
+	-webkit-transform: rotate(-8deg) scale(1.2);
+	-webkit-transition: -webkit-transform 0.1s ease-in;
 }

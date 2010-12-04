@@ -1,4 +1,15 @@
-#content
-	#main
-		%h1 How much is it? 
-		= yield
+%html
+	%head
+		= stylesheet_link_tag "http://yui.yahooapis.com/2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css"
+		= stylesheet_link_tag "style"
+	%body
+		#doc.yui-t7
+			#hd{:role=>"banner"}
+				%h1 How much is it? 
+			#bd{:role=>"main"}
+				.yui-g
+					= yield
+			#ft{:role=>"contentinfo"}
+				%p
+					Done by Jen from initial ideas from 
+					%a{:href=>"http://how-fast-am-i.heroku.com"} Jen and Nick

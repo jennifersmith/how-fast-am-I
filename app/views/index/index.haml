@@ -1,3 +1,6 @@
 %form{:method=>"post", :action=>"whatever/"}
-	=text_field :comparison, :amount
-	=button_to "Go"
+	%fieldset
+		%legend Enter amount in pounds
+		=text_field :comparison, :amount
+	%div.buttons
+		=button_to "Go",{}, {:class=>"go-button"}
