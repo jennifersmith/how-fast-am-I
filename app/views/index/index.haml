@@ -1,6 +1,6 @@
-%form{:method=>"post", :action=>"whatever/"}
+%form{:method=>"post"}
 	%fieldset
 		%legend Enter amount in pounds
-		=text_field :comparison, :amount
+		%input{:type=>"text",:name=>:amount}
 	%div.buttons
 		=button_to "Go",{}, {:class=>"go-button"}
